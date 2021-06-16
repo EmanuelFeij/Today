@@ -3,13 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/EmanuelFeij/Today/weather"
+	"github.com/EmanuelFeij/Today/kanye"
 )
 
 func main() {
-	prevision, err := weather.GetWeather("CoImBra", true)
-	if err != nil {
-		return
-	}
-	fmt.Println(prevision)
+	fmt.Println(kanye.GetKanyeTweet())
 }
