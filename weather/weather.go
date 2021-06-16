@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"strings"
+
+	"github.com/EmanuelFeij/Today/response"
 )
 
 var (
@@ -105,14 +106,10 @@ func GetWeather(city string, nextDays bool) (string, error) {
 		return "", fmt.Errorf("city %v not found", city)
 	}
 	cityID := region.GlobalIdLocal
-	apiRequest := fmt.Sprintf("https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/%v.json", cityID)
-	resp, err := http.Get(apiRequest)
-	if err != nil {
-		return "", fmt.Errorf("error getting api response: %v", err)
-	}
-	defer resp.Body.Close()
+	apiUri := fmt.Sprintf("https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/%v.json", cityID)
 	var ipmaRes ipmaResponse
-	err = json.NewDecoder(resp.Body).Decode(&ipmaRes)
+	err := response.RequestResponse(apiUri, &ipmaRes)
+
 	if err != nil {
 		return "", fmt.Errorf("error decoding api response: %v", err)
 	}
