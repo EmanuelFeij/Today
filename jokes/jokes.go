@@ -4,7 +4,7 @@ const (
 	APIUri = "https://v2.jokeapi.dev/joke/Any"
 )
 
-type jokeResponse struct {
+type JokeResponse struct {
 	Error      bool        `json:"error"`
 	Category   string      `json:"category"`
 	TypeOfJoke string      `json:"type"`

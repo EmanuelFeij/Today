@@ -102,12 +102,15 @@ func GetWeather(city string, nextDays bool) (string, error) {
 
 	region, ok := MapRegions[strings.ToLower(city)]
 	city = strings.Title(strings.ToLower(city))
+
 	if !ok {
 		return "", fmt.Errorf("city %v not found", city)
 	}
+
 	cityID := region.GlobalIdLocal
 	apiUri := fmt.Sprintf("https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/%v.json", cityID)
 	var ipmaRes ipmaResponse
+
 	err := response.RequestResponse(apiUri, &ipmaRes)
 
 	if err != nil {
